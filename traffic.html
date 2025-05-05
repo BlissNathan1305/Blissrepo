@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Traffic Light Simulation</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  .traffic-light {
+    width: 100px;
+    height: 300px;
+    background-color: #333;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  .light {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #111;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .red {
+    background-color: red;
+    box-shadow: 0 0 20px red;
+  }
+
+  .yellow {
+    background-color: yellow;
+    box-shadow: 0 0 20px yellow;
+  }
+
+  .green {
+    background-color: green;
+    box-shadow: 0 0 20px green;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .traffic-light {
+      width: 80px;
+      height: 240px;
+      padding: 15px;
+    }
+
+    .light {
+      width: 50px;
+      height: 50px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="traffic-light">
+  <div class="light" id="red-light"></div>
+  <div class="light" id="yellow-light"></div>
+  <div class="light" id="green-light"></div>
+</div>
+
+<script>
+  const redLight = document.getElementById('red-light');
+  const yellowLight = document.getElementById('yellow-light');
+  const greenLight = document.getElementById('green-light');
+
+  let currentState = 'red';
+
+  function updateLights() {
+    redLight.className = 'light';
+    yellowLight.className = 'light';
+    greenLight.className = 'light';
+
+    switch (currentState) {
+      case 'red':
+        redLight.className = 'light red';
+        setTimeout(() => {
+          currentState = 'green';
+          updateLights();
+        }, 3000); // Red for 3 seconds
+        break;
+      case 'green':
+        greenLight.className = 'light green';
+        setTimeout(() => {
+          currentState = 'yellow';
+          updateLights();
+        }, 3000); // Green for 3 seconds
+        break;
+      case 'yellow':
+        yellowLight.className = 'light yellow';
+        setTimeout(() => {
+          currentState = 'red';
+          updateLights();
+        }, 1000); // Yellow for 1 second
+        break;
+    }
+  }
+
+  // Initial call to start the traffic light
+  updateLights();
+</script>
+
+</body>
+</html>
+
+
